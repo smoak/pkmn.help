@@ -19,7 +19,26 @@ function Defense(props) {
         value: props.type2,
         onChange: props.updateType2,
         includeNone: true
-      })
+      }),
+      $("h2", {className: classH2 + " mt4"}, "choose status"),
+      $("select", {},
+        $("option", {value: ""}, "—"),
+        $("option", {value: "forest-curse"}, "Forest's Curse"),
+        $("option", {value: "trick-or-treat"}, "Trick-or-Treat")
+      ),
+      $("h2", {className: classH2 + " mt4"}, "choose ability"),
+      $("select", {},
+        $("option", {value: ""}, "—"),
+        $("option", {value: "..."}, "Thick Fat"),
+        $("option", {value: "..."}, "Heatproof"),
+        $("option", {value: "..."}, "Levitate"),
+        $("option", {value: "..."}, "Volt Absorb"),
+        $("option", {value: "..."}, "Water Absorb"),
+        $("option", {value: "..."}, "Dry Skin"),
+        $("option", {value: "..."}, "Flash Fire"),
+        $("option", {value: "..."}, "Filter"),
+        $("option", {value: "..."}, "Wonder Guard")
+      )
     ),
     $("div", {className: "dib w-50-ns v-top pl3-ns mt4-ns"},
       $("hr", {className: "dn-ns subtle-hr mv4"}),
