@@ -21,10 +21,10 @@ function Dropdown(props) {
     "pa2",
     "f4"
   )
-  const onInput = event => {
-    onChange(event.value)
+  const handler = event => {
+    onChange(event.target.value)
   }
-  return $("select", {className, onInput}, elements)
+  return $("select", {className, onChange: handler}, elements)
 }
 
 module.exports = Dropdown

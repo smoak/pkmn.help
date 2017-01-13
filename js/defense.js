@@ -25,12 +25,12 @@ function Defense(props) {
       $("h2", {className: classH2 + " mt4"}, "choose status"),
       $(Dropdown, {
         options: Data.statuses,
-        onChange: x => x
+        onChange: props.updateStatus
       }),
       $("h2", {className: classH2 + " mt4"}, "choose ability"),
       $(Dropdown, {
         options: Data.abilities,
-        onChange: x => x
+        onChange: props.updateAbility
       })
     ),
     $("div", {className: "dib w-50-ns v-top pl3-ns mt4-ns"},

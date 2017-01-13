@@ -25,6 +25,18 @@ function mapDispatchToProps(dispatch) {
         value: tab
       })
     },
+    updateStatus(status) {
+      dispatch({
+        type: "UpdateStatus",
+        value: status
+      })
+    },
+    updateAbility(ability) {
+      dispatch({
+        type: "UpdateAbility",
+        value: ability
+      })
+    },
     updateType0(type) {
       dispatch({
         type: "UpdateType0",
@@ -51,7 +63,9 @@ function mapStateToProps(state) {
     tab: state.tab,
     type0: state.type0,
     type1: state.type1,
-    type2: state.type2
+    type2: state.type2,
+    ability: "none",
+    status: "none",
   }
 }
 

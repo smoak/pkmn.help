@@ -22,13 +22,13 @@ const types = [
 ]
 
 const statuses = [
-  "—",
+  "none",
   "Forest's Curse",
   "Trick-or-Treat"
 ]
 
 const abilities = [
-  "—",
+  "none",
   "Thick Fat",
   "Heatproof",
   "Levitate",
