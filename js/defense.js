@@ -1,6 +1,8 @@
 const React = require("react")
 const TypeSelector = require("./type-selector")
 const Matchups = require("./matchups")
+const Data = require("./data")
+const Dropdown = require("./dropdown")
 
 const $ = React.createElement
 
@@ -21,24 +23,15 @@ function Defense(props) {
         includeNone: true
       }),
       $("h2", {className: classH2 + " mt4"}, "choose status"),
-      $("select", {},
-        $("option", {value: ""}, "—"),
-        $("option", {value: "forest-curse"}, "Forest's Curse"),
-        $("option", {value: "trick-or-treat"}, "Trick-or-Treat")
-      ),
+      $(Dropdown, {
+        options: Data.statuses,
+        onChange: x => x
+      }),
       $("h2", {className: classH2 + " mt4"}, "choose ability"),
-      $("select", {},
-        $("option", {value: ""}, "—"),
-        $("option", {value: "..."}, "Thick Fat"),
-        $("option", {value: "..."}, "Heatproof"),
-        $("option", {value: "..."}, "Levitate"),
-        $("option", {value: "..."}, "Volt Absorb"),
-        $("option", {value: "..."}, "Water Absorb"),
-        $("option", {value: "..."}, "Dry Skin"),
-        $("option", {value: "..."}, "Flash Fire"),
-        $("option", {value: "..."}, "Filter"),
-        $("option", {value: "..."}, "Wonder Guard")
-      )
+      $(Dropdown, {
+        options: Data.abilities,
+        onChange: x => x
+      })
     ),
     $("div", {className: "dib w-50-ns v-top pl3-ns mt4-ns"},
       $("hr", {className: "dn-ns subtle-hr mv4"}),

@@ -21,6 +21,25 @@ const types = [
   "fairy"
 ]
 
+const statuses = [
+  "—",
+  "Forest's Curse",
+  "Trick-or-Treat"
+]
+
+const abilities = [
+  "—",
+  "Thick Fat",
+  "Heatproof",
+  "Levitate",
+  "Volt Absorb",
+  "Water Absorb",
+  "Dry Skin",
+  "Flash Fire",
+  "Filter",
+  "Wonder Guard"
+]
+
 function rawDataStrToNumber(str) {
   if (str === "2") return 2
   if (str === "1") return 1
@@ -100,6 +119,8 @@ function defensiveMatchups(t1, t2) {
   return _.invertBy(allMatchups)
 }
 
+exports.statuses = statuses
+exports.abilities = abilities
 exports.offensiveMatchups = offensiveMatchups
 exports.defensiveMatchups = defensiveMatchups
 exports.typesOrNone = typesOrNone
