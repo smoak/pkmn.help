@@ -4,7 +4,9 @@ const initialState = {
   tab: 1,
   type0: "normal",
   type1: "normal",
-  type2: "none"
+  type2: "none",
+  ability: "none",
+  status: "none",
 }
 
 const table = {
@@ -19,7 +21,13 @@ const table = {
   },
   UpdateType2(state, action) {
     return {type2: action.value}
-  }
+  },
+  UpdateStatus(state, action) {
+    return {status: action.value}
+  },
+  UpdateAbility(state, action) {
+    return {ability: action.value}
+  },
 }
 
 function update(a, b) {

@@ -18,6 +18,7 @@ function Dropdown(props) {
     "input-reset",
     "br3 ba b--black-30",
     "bg-white black",
+    "chunky-focus",
     "pa2",
     "f4"
   )

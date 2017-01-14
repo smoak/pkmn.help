@@ -1,3 +1,4 @@
+const _ = require("lodash")
 const React = require("react")
 const Data = require("./data")
 const classes = require("./classes")
@@ -23,34 +24,44 @@ function section(title, info) {
   if (!info) {
     return null
   }
-  return $("div", {},
+  return $("div", {key: title},
     $("h3", {className: "f4 mt3 mb0 dark-gray"}, title),
     $("div", {className: "mw6 center"}, info.map(badge))
   )
 }
 
+function formatFactor(f) {
+  if (f === 0.50) return "½"
+  if (f === 0.25) return "¼"
+  return "" + f
+}
+
+function makeSections(direction, matchups) {
+  // Sorted damage scaling factors from object keys
+  const factors = _.sortBy(Object.keys(matchups).map(Number)).reverse()
+  return factors.map(f => {
+    const types = matchups[f]
+    const factor = formatFactor(f)
+    return section(`${direction} ${factor}×`, types)
+  })
+}
+
 function Defense(props) {
-  const matchups = Data.defensiveMatchups(props.type1, props.type2)
-  return $("div", {className: "tc"},
-    section("takes 4×", matchups.quadruple),
-    section("takes 2×", matchups.double),
-    section("takes 1×", matchups.normal),
-    section("takes ½×", matchups.half),
-    section("takes ¼×", matchups.quarter),
-    section("takes 0×", matchups.zero)
-  )
+  const matchups =
+    Data.defensiveMatchups(
+      props.type1,
+      props.type2,
+      props.status,
+      props.ability
+    )
+  const sections = makeSections("takes", matchups)
+  return $("div", {className: "tc"}, sections)
 }
 
 function Offense(props) {
   const matchups = Data.offensiveMatchups(props.type)
-  return $("div", {className: "tc"},
-    section("deals 4×", matchups.quadruple),
-    section("deals 2×", matchups.double),
-    section("deals 1×", matchups.normal),
-    section("deals ½×", matchups.half),
-    section("deals ¼×", matchups.quarter),
-    section("deals 0×", matchups.zero)
-  )
+  const sections = makeSections("deals", matchups)
+  return $("div", {className: "tc"}, sections)
 }
 
 exports.Defense = Defense

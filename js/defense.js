@@ -22,22 +22,32 @@ function Defense(props) {
         onChange: props.updateType2,
         includeNone: true
       }),
-      $("h2", {className: classH2 + " mt4"}, "choose status"),
-      $(Dropdown, {
-        options: Data.statuses,
-        onChange: props.updateStatus
-      }),
-      $("h2", {className: classH2 + " mt4"}, "choose ability"),
-      $(Dropdown, {
-        options: Data.abilities,
-        onChange: props.updateAbility
-      })
+      $("div", {},
+        $("div", {className: "fl-l w-50-l pa1-l"},
+          $("h2", {className: classH2 + " mt4"}, "choose extra type"),
+          $(Dropdown, {
+            options: Data.statuses,
+            onChange: props.updateStatus
+          })
+        )
+      ),
+      $("div", {},
+        $("div", {className: "fl-l w-50-l pa1-l"},
+          $("h2", {className: classH2 + " mt4"}, "choose ability"),
+          $(Dropdown, {
+            options: Data.abilities,
+            onChange: props.updateAbility
+          })
+        )
+      )
     ),
     $("div", {className: "dib w-50-ns v-top pl3-ns mt4-ns"},
       $("hr", {className: "dn-ns subtle-hr mv4"}),
       $(Matchups.Defense, {
         type1: props.type1,
-        type2: props.type2
+        type2: props.type2,
+        status: props.status,
+        ability: props.ability
       })
     )
   )

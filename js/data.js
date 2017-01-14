@@ -21,24 +21,46 @@ const types = [
   "fairy"
 ]
 
-const statuses = [
-  "none",
-  "Forest's Curse",
-  "Trick-or-Treat"
-]
+const statusTypes = {
+  "Forest's Curse (grass)": "grass",
+  "Trick-or-Treat (ghost)": "ghost",
+}
 
-const abilities = [
-  "none",
-  "Thick Fat",
-  "Heatproof",
-  "Levitate",
-  "Volt Absorb",
-  "Water Absorb",
-  "Dry Skin",
-  "Flash Fire",
-  "Filter",
-  "Wonder Guard"
-]
+const statuses = ["none", ...Object.keys(statusTypes)]
+
+const abilityFactors = {
+  "Thick Fat": {
+    ice: 0.5,
+    fire: 0.5,
+  },
+  "Heatproof": {
+    fire: 0.5
+  },
+  "Levitate": {
+    ground: 0
+  },
+  "Volt Absorb": {
+    electric: 0
+  },
+  "Water Absorb": {
+    water: 0,
+  },
+  "Dry Skin": {
+    fire: 1.25,
+    water: 0,
+  },
+  "Flash Fire": {
+    fire: 0
+  },
+  "Water Bubble": {
+    fire: 0.5
+  },
+  "Prism Guard": {},
+  "Filter": {},
+  "Wonder Guard": {},
+}
+
+const abilities = ["none", ...Object.keys(abilityFactors)]
 
 function rawDataStrToNumber(str) {
   if (str === "2") return 2
@@ -82,21 +104,34 @@ const pairs =
 
 const table = _.fromPairs(pairs)
 
-function matchupFor(ta1, ta2, tb) {
+// Pokémon abilities can provide damage scaling factors for certain types.
+function applyAbility(factor, tb, ability) {
+  if (ability === "none") {
+    return factor
+  } else if (ability === "Filter" || ability === "Prism Armor") {
+    return factor * (factor >= 2 ? 0.25 : 1)
+  } else if (ability === "Wonder Guard") {
+    return factor * (factor < 2 ? 0 : 1)
+  } else if (tb in abilityFactors[ability]) {
+    return factor * abilityFactors[ability][tb]
+  } else {
+    return factor
+  }
+}
+
+function matchupFor(ta1, ta2, status, ability, tb) {
   const x1 = table[keyForTypes(tb, ta1)]
   // Don't allow bogus type combinations, such as Fire/Fire or Fire/None
   const x2 = (ta1 !== ta2 && ta2 !== "none")
     ? table[keyForTypes(tb, ta2)]
     : 1
-
-  const x3 = x1 * x2
-  if (x3 === 4.00) return "quadruple"
-  if (x3 === 2.00) return "double"
-  if (x3 === 1.00) return "normal"
-  if (x3 === 0.50) return "half"
-  if (x3 === 0.25) return "quarter"
-  if (x3 === 0.00) return "zero"
-  throw new Error()
+  // Certain Pokémon moves can provide a third type as a status.
+  // Pokémon can't have the same type twice, though.
+  const ta3 = statusTypes[status]
+  const x3 = status !== "none" && ta3 && ta3 !== ta1 && ta3 !== ta2
+    ? table[keyForTypes(tb, ta3)]
+    : 1
+  return applyAbility(x1 * x2 * x3, tb, ability)
 }
 
 const typesOrNone = types.concat("none")
@@ -109,13 +144,13 @@ function mapToObj(array, fn) {
 
 function offensiveMatchups(type) {
   const allMatchups =
-    mapToObj(types, t => matchupFor(t, "none", type))
+    mapToObj(types, t => matchupFor(t, "none", "none", "none", type))
   return _.invertBy(allMatchups)
 }
 
-function defensiveMatchups(t1, t2) {
+function defensiveMatchups(t1, t2, status, ability) {
   const allMatchups =
-    mapToObj(types, t => matchupFor(t1, t2, t))
+    mapToObj(types, t => matchupFor(t1, t2, status, ability, t))
   return _.invertBy(allMatchups)
 }
 

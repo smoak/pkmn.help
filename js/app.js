@@ -11,8 +11,8 @@ function App(props) {
     changeTab: props.changeTab,
     current: props.tab,
     items: [
-      {title: "Offense", element: Offense(props)},
-      {title: "Defense", element: Defense(props)},
+      {title: "Offense", element: $(Offense, props)},
+      {title: "Defense", element: $(Defense, props)},
     ],
   })
 }
@@ -64,8 +64,8 @@ function mapStateToProps(state) {
     type0: state.type0,
     type1: state.type1,
     type2: state.type2,
-    ability: "none",
-    status: "none",
+    ability: state.ability,
+    status: state.status,
   }
 }
 
