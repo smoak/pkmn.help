@@ -56,6 +56,41 @@ const theme = {
     ghost: "#705898",
     steel: "#b8b8d0",
     none: "#dedede"
+  },
+
+  colors: {
+    washedBlue: "#f6fffe"
+  },
+
+  sizes: {
+    0: "0",
+    1: "0.25rem",
+    2: "0.5rem",
+    3: "1rem",
+    4: "2rem",
+    5: "4rem",
+    6: "8rem",
+    7: "16rem",
+  },
+
+  fontSizes: {
+    1: "3rem",
+    2: "2.25rem",
+    3: "1.5rem",
+    4: "1.25rem",
+    5: "1rem",
+    6: "0.875rem",
+    7: "0.75rem",
+  },
+
+  borderRadius: {
+    0: "0",
+    1: "0.125rem",
+    2: "0.25rem",
+    3: "0.5rem",
+    4: "1rem",
+    100: "100%",
+    pill: "9999px",
   }
 };
 

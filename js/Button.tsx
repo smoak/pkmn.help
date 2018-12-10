@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as classnames from "classnames";
 
-import { css, mixins } from "./theme";
+import { css, theme, mixins } from "./theme";
 
 function buttonClass(disabled: boolean) {
   return classnames(
@@ -24,7 +24,10 @@ const cssButton = (props: ButtonProps) =>
     {
       display: "block",
       width: "100%",
-      border: "1px",
+      border: "1px solid",
+      padding: `${theme.sizes[3]} ${theme.sizes[4]}`,
+      fontSize: theme.fontSizes[3],
+      borderRadius: theme.borderRadius[1],
       fontWeight: "bold"
     },
     props.disabled
@@ -39,7 +42,7 @@ const cssButton = (props: ButtonProps) =>
           color: "rgba(0, 0, 0, 0.8)",
 
           "&:hover": {
-            background: "lightblue"
+            background: theme.colors.washedBlue
           }
         }
   );
