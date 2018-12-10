@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as classnames from "classnames";
 
+import { css, mixins } from "./theme";
+
 function buttonClass(disabled: boolean) {
   return classnames(
     "db w-100",
@@ -15,20 +17,47 @@ function buttonClass(disabled: boolean) {
   );
 }
 
+const cssButton = (props: ButtonProps) =>
+  css(
+    mixins.chunkyFocus,
+    mixins.clicky,
+    {
+      display: "block",
+      width: "100%",
+      border: "1px",
+      fontWeight: "bold"
+    },
+    props.disabled
+      ? {
+          borderColor: "rgba(0, 0, 0, 0.1)",
+          background: "transparent",
+          color: "rgba(0, 0, 0, 0.2)"
+        }
+      : {
+          borderColor: "rgba(0, 0, 0, 0.4)",
+          background: "white",
+          color: "rgba(0, 0, 0, 0.8)",
+
+          "&:hover": {
+            background: "lightblue"
+          }
+        }
+  );
+
 interface ButtonProps {
   onClick(): void;
   disabled: boolean;
   children: any;
 }
 
-function Button(props: ButtonProps) {
-  const { onClick, disabled, children } = props;
-  const className = buttonClass(disabled);
-  return (
-    <button onClick={onClick} disabled={disabled} className={className}>
-      {children}
-    </button>
-  );
-}
+const Button = (props: ButtonProps) => (
+  <button
+    onClick={props.onClick}
+    disabled={props.disabled}
+    className={cssButton(props)}
+  >
+    {props.children}
+  </button>
+);
 
 export default Button;

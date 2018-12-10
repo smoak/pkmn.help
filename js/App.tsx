@@ -1,4 +1,5 @@
 import * as React from "react";
+import { css } from "emotion";
 
 import Offense from "./Offense";
 import Defense from "./Defense";
@@ -98,7 +99,9 @@ class App extends React.Component<{}, State> {
           <div className="mt4" />
           <div className="mw8 center">
             <p>
-              Sorry about the recent downtime on December 4th, 2018. I migrated web hosts and had some issues getting a new certificate. Thank you for your patience.
+              Sorry about the recent downtime on December 4th, 2018. I migrated
+              web hosts and had some issues getting a new certificate. Thank you
+              for your patience.
             </p>
           </div>
         </div>

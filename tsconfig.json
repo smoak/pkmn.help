@@ -2,8 +2,6 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "allowJs": true,
     "outDir": "build",
     "baseUrl": "js",
