@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge renders 1`] = `
+<div
+  className="type-normal ba b--black-10 badge with-border-color dib pv2 ph3 br1 ma--2px ttu tc b f5 f4-l"
+  key="normal"
+  style={
+    Object {
+      "minWidth": "7.5em",
+    }
+  }
+>
+  normal
+</div>
+`;

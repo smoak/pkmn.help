@@ -1,5 +1,4 @@
 import React from "react";
-import classnames from "classnames";
 
 import {
   Type,
@@ -8,25 +7,7 @@ import {
   defensiveMatchups,
   offensiveMatchups
 } from "./data";
-
-function badge(type: Type) {
-  const style = { minWidth: "7.5em" };
-  const className = classnames(
-    `type-${type}`,
-    "ba b--black-10",
-    "badge",
-    "with-border-color",
-    "dib pv2 ph3",
-    "br1",
-    "ma--2px",
-    "ttu tc b f5 f4-l"
-  );
-  return (
-    <div key={type} className={className} style={style}>
-      {type}
-    </div>
-  );
-}
+import Badge from "./Badge";
 
 function section(title: string, types: Type[]) {
   if (types.length === 0) {
@@ -35,7 +16,11 @@ function section(title: string, types: Type[]) {
   return (
     <div>
       <h3 className="f4 mt3 mb0 dark-gray">{title}</h3>
-      <div className="mw6 center">{types.map(badge)}</div>
+      <div className="mw6 center">
+        {types.map(t => {
+          return <Badge pokemonType={t} />;
+        })}
+      </div>
     </div>
   );
 }
